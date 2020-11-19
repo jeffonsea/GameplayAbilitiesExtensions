@@ -4,6 +4,7 @@
 #include "UObject/NoExportTypes.h"
 
 #include "Abilities/GameplayAbility.h"
+#include "Engine/DataAsset.h"
 
 #include "Abilities_fwd.generated.h"
 
