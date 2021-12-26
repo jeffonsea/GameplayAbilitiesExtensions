@@ -1,4 +1,4 @@
-#include "Abilities/Abilities_fwd.h"
+#include "Abilities/JAbilities_fwd.h"
 
 #include "GameplayAbilitySpec.h"
 #include "AbilitySystemComponent.h"
@@ -6,7 +6,7 @@
 
 DEFINE_LOG_CATEGORY_STATIC(LogAbilities, All, All);
 
-void UAbilitySet::GiveAbilities(AActor* AbilityActor)
+void UJAbilitySet::GiveAbilities(AActor* AbilityActor)
 {
     if (!AbilityActor->HasAuthority())
     {
@@ -17,7 +17,7 @@ void UAbilitySet::GiveAbilities(AActor* AbilityActor)
     {
         if (UAbilitySystemComponent* pASC = pASI->GetAbilitySystemComponent())
         {
-            for (FGameplayAbilityBindInfoExtended& BindInfo : Bindings)
+            for (FJGameplayAbilityBindInfoExtended& BindInfo : Bindings)
             {
                 FGameplayAbilitySpec spec = FGameplayAbilitySpec
                 (
@@ -36,4 +36,18 @@ void UAbilitySet::GiveAbilities(AActor* AbilityActor)
         // Add warning.
         UE_LOG(LogAbilities, Warning, TEXT("Attempted to GiveAbilities to a non IAbilitySystemInterface actor."));
     }
+}
+
+bool UJAbilitySet::GetAbilityBinding(EJAbilityInputsExtended Input, FJGameplayAbilityBindInfoExtended& OutBinding)
+{
+    for (const FJGameplayAbilityBindInfoExtended& binding : Bindings)
+    {
+        if (binding.Input != Input)
+            continue;
+
+        OutBinding = binding;
+        return true;
+    }
+
+    return false;
 }

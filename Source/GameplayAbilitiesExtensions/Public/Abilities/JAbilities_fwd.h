@@ -6,10 +6,10 @@
 #include "Abilities/GameplayAbility.h"
 #include "Engine/DataAsset.h"
 
-#include "Abilities_fwd.generated.h"
+#include "JAbilities_fwd.generated.h"
 
 UENUM(BlueprintType)
-enum class EAbilityInputsExtended : uint8 
+enum class EJAbilityInputsExtended : uint8 
 {
 	Ability1 UMETA(DisplayName = "Ability1 (LMB)"),
     Ability2 UMETA(DisplayName = "Ability2 (RMB)"),
@@ -23,27 +23,30 @@ enum class EAbilityInputsExtended : uint8
 };
 
 USTRUCT(BlueprintType)
-struct FGameplayAbilityBindInfoExtended
+struct FJGameplayAbilityBindInfoExtended
 {
 	GENERATED_USTRUCT_BODY()
 
 public:
 	UPROPERTY(EditAnywhere)
-	EAbilityInputsExtended Input;
+	EJAbilityInputsExtended Input;
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UGameplayAbility> GameplayAbilityClass;
 };
 
-UCLASS()
-class GAMEPLAYABILITIESEXTENSIONS_API UAbilitySet : public UDataAsset
+UCLASS(BlueprintType)
+class GAMEPLAYABILITIESEXTENSIONS_API UJAbilitySet : public UDataAsset
 {
 	GENERATED_BODY()
 	
 public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TArray<FGameplayAbilityBindInfoExtended> Bindings;
+	TArray<FJGameplayAbilityBindInfoExtended> Bindings;
 
 	UFUNCTION(BlueprintCallable)
 	virtual void GiveAbilities(AActor* AbilityActor);
+
+	UFUNCTION(BlueprintCallable, Category="Input")
+	bool GetAbilityBinding(EJAbilityInputsExtended Input, FJGameplayAbilityBindInfoExtended& OutBinding);
 };

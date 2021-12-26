@@ -2,6 +2,8 @@
 
 #include "GameplayAbilitiesExtensions.h"
 
+DEFINE_LOG_CATEGORY_STATIC(LogGameplayAbilitiesExtensions, All, All);
+
 #define LOCTEXT_NAMESPACE "FGameplayAbilitiesExtensionsModule"
 
 void FGameplayAbilitiesExtensionsModule::StartupModule()
