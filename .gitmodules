@@ -1,0 +1,3 @@
+[submodule "Source/GameplayAbilitiesExtensions"]
+	path = Source/GameplayAbilitiesExtensions
+	url = git@github.com:jeffonsea/ArgonautFramework-GameplayAbilitiesExtensions.git
